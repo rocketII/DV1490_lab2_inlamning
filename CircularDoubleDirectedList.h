@@ -1,0 +1,15 @@
+//
+// Created by root on 2016-04-14.
+//
+
+#ifndef INLAMNING1_CIRCULARDOUBLEDIRECTEDLIST_H
+#define INLAMNING1_CIRCULARDOUBLEDIRECTEDLIST_H
+
+
+class CircularDoubleDirectedList
+{
+
+};
+
+
+#endif //INLAMNING1_CIRCULARDOUBLEDIRECTEDLIST_H
