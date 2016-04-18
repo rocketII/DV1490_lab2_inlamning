@@ -10,7 +10,6 @@ int main()
 
 	aQueue.enqueue(10);
 	aQueue.enqueue(30);
-
 	bQueue.enqueue(55);
 	cout<<"**** Test of copy constructor ****"<<endl<<endl;
 	cout<<"Expected output: 10 30 55"<<endl<<endl;

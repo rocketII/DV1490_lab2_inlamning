@@ -7,7 +7,7 @@ int main()
 {
 	//_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	cout<<"Expected output\n0\n1\nQueue is not empty.\nDequeued\n1\n2\nDequeued\n3\n4\n5\n6\nFront element\n7\nDequeued until empty:\n7\nQueue is empty \n\nException: empty queue\n\nException: empty queue\n\n"<<endl<<endl;
-	system("pause");
+	//system("pause");
 	cout<<endl<<"Your output"<<endl;
 	Queue<int> aQueue;
 
@@ -51,17 +51,17 @@ int main()
 	{
 		cout << aQueue.front() << endl;
 	}
-	catch(char* e)
+	catch(...)
 	{
-		cout<<endl<<e<<endl;
+		cout<<endl<<"Cool! So Empty!"<<endl;
 	}
 	try
 	{
 		cout << aQueue.dequeue() << endl;
 	}
-	catch(char* e)
+	catch(...)
 	{
-		cout<<endl<<e<<endl;
+		cout<<endl<<"Cool! So Empty :3"<<endl;
 	}
 
 	for (int i=0; i<200; i++)

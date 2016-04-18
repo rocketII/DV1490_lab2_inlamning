@@ -3,17 +3,30 @@
 //
 #include "Queue.h"
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
-int main()
-{
+int main() {
     Queue<int> aQueue;
-    Queue<int> bQueue = aQueue;
 
-    aQueue.enqueue(10);
-    aQueue.enqueue(30);
+
+    aQueue.enqueue(1);
     aQueue.enqueue(2);
+    aQueue.enqueue(3);
+    aQueue.enqueue(4);
+    aQueue.enqueue(11);
+    cout<<aQueue.front()<<endl;
+    aQueue.dequeue();
+    cout<<aQueue.front()<<endl;
+    aQueue.enqueue(22);
+    aQueue.enqueue(66);
+    cout<<aQueue.front()<<endl;
+    aQueue.dequeue();
+    cout<<aQueue.front()<<endl;
+    aQueue.enqueue(77);
+    aQueue.enqueue(88);
+    aQueue.enqueue(99);
 
     cout<<endl;
 
