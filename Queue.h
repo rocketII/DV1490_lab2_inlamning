@@ -2,44 +2,43 @@
 // Created by root on 2016-04-14.
 //
 
-#ifndef INLAMNING1_QUEUE_H
-#define INLAMNING1_QUEUE_H
-
+#ifndef QUEUE_H
+#define QUEUE_H
 #include "IQueue.h"
+
 template <class T>
-class Queue : public IQueue
+class Queue : public IQueue<T>
 {
 private:
-    T* ptr;
+    T* ptr= nullptr;
+    int frontptr, backptr;
     int nrOfElements=0;
     int capacity=0;
 public:
     Queue();
-    ~Queue();
+    virtual ~Queue();
     Queue(const Queue<T>& orgin);
     Queue<T>& operator=(const Queue<T>& orgin);
     //inherited
-    virtual ~IQueue() {};
     virtual void enqueue(const T& item);
     virtual T dequeue();
     virtual T& front() const;
     virtual bool isEmpty() const;
 
 };
-template <class T>
-IQueue<T>::~IQueue()
-{}
+
 template <class T>
 Queue<T>::Queue()
 {
     this->nrOfElements=0;
+    this->backptr=0;
+    this->frontptr=0;
     this->ptr = new T[2];
     this->capacity=2;
 }
 template <class T>
 Queue<T>::~Queue()
 {
-    IQueue<T>::~IQueue();
     delete[]  this->ptr;
 }
 template <class T>
@@ -54,7 +53,7 @@ Queue<T>::Queue(const Queue<T> &orgin)
     }
 }
 template <class T>
-Queue<T> &Queue::operator=(const Queue<T> &orgin)
+Queue<T>& Queue<T>::operator=(const Queue<T> &orgin)
 {
     if(this != &orgin)
     {
@@ -62,7 +61,8 @@ Queue<T> &Queue::operator=(const Queue<T> &orgin)
         this->capacity = orgin.capacity;
         delete[] this->ptr;
         this->ptr = new T[this->capacity];
-        for (int i = 0; i < this->nrOfElements; ++i) {
+        for (int i = 0; i < this->nrOfElements; ++i)
+        {
             this->ptr[i] = orgin.ptr[i];
         }
     }
@@ -72,8 +72,13 @@ Queue<T> &Queue::operator=(const Queue<T> &orgin)
 template <class T>
 void Queue<T>::enqueue(const T &item)
 {
-    if(this->nrOfElements > this->capacity)
+    if(this->nrOfElements < this->capacity)
     {
+        ;
+    }
+    else
+    {
+
         //expansion
         T* tmp= new T[this->capacity];
         for (int i = 0; i < this->capacity ; ++i)
@@ -89,28 +94,31 @@ void Queue<T>::enqueue(const T &item)
         }
         delete[] tmp;
     }
-    else
-    {
-        this->ptr= new T[this->capacity+3];
-        this->capacity+=3;
-    }
-    this->ptr[this->nrOfElements]= item;
     this->nrOfElements++;
+    this->backptr = (this->backptr + 1) % this->capacity;
+    this->ptr[this->backptr]= item;
+
 }
 template <class T>
 T Queue<T>::dequeue()
 {
-    return nullptr;
+    if(!this->isEmpty())
+    {
+        T data = this->ptr[this->frontptr];
+        this->frontptr++;
+        this->nrOfElements--;
+        return data;
+    }
 }
 template <class T>
 T &Queue<T>::front() const
 {
-    return this->ptr[this->nrOfElements-1];
+    return this->ptr[this->frontptr];
 }
 template <class T>
 bool Queue<T>::isEmpty() const
 {
-    if(this->capacity == 0)
+    if(this->nrOfElements == 0)
     {
         return true;
     }
